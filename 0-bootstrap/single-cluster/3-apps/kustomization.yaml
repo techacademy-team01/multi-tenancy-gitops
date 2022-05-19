@@ -28,6 +28,13 @@ resources:
 
 #- argocd/cp4a/cp4a.yaml
 
+
+## SKO sample apps
+#- argocd/sko-sample/eventstream
+#- argocd/sko-sample/mqmgr
+#- argocd/sko-sample/ace-001
+
+
 patches:
 - target:
     group: argoproj.io

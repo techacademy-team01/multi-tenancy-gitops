@@ -18,6 +18,12 @@ resources:
 #- argocd/operators/ibm-platform-navigator.yaml
 #- argocd/instances/ibm-platform-navigator-instance.yaml
 
+## CP4I for SKO
+#- argocd/instances/ace-infra.yaml
+#- argocd/instances/assetrepo.yaml
+#- argocd/instances/license-reporter.yaml
+#- argocd/instances/opsdashboard.yaml
+
 ## Cloud Pak for Business Automation
 #- argocd/operators/ibm-cp4a-operator.yaml
 #- argocd/operators/ibm-db2u-operator.yaml

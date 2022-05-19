@@ -27,10 +27,11 @@ spec:
             spec:
               license:
                 accept: true
-                license: L-RJON-BZFQU2
+                license: L-RJON-C7QG3S
+              requestIbmServices:
+                licensing: true
               mqDashboard: true
-              version: "2021.2.1"
-              replicas: 2
+              replicas: 3
               storage:
                 class: managed-nfs-storage
-
+              version: 2021.4.1
