@@ -24,7 +24,7 @@ spec:
             cloudpakforintegration:
               name: ibm-cp-integration
               subscription:
-                channel: v1.3
+                channel: v1.5
                 installPlanApproval: Automatic
                 name: ibm-cp-integration
                 source: ibm-operator-catalog
