@@ -85,6 +85,8 @@ rules:
       - 'integration.ibm.com'
     resources:
       - platformnavigators
+      - operationsdashboards
+      - assetrepositories
   - verbs:
       - '*'
     apiGroups:
@@ -256,6 +258,7 @@ rules:
       - operator.ibm.com
     resources:
       - commonservices
+      - ibmlicenseservicereporters
   - verbs:
       - '*'
     apiGroups:
