@@ -17,7 +17,7 @@ spec:
   project: services
   source:
     path: operators/ibm-opsdashboard-operator
-     helm:
+    helm:
       values: |
         ibm-opsdashboard-operator:
           subscriptions:
