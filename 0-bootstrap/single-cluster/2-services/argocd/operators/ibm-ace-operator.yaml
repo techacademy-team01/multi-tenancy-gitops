@@ -24,7 +24,7 @@ spec:
             ibmace:
               name: ibm-ace
               subscription:
-                channel: v3.0
+                channel: v4.1
                 installPlanApproval: Automatic
                 name: ibm-appconnect
                 source: ibm-operator-catalog
