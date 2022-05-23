@@ -16,7 +16,7 @@ spec:
     server: 'https://kubernetes.default.svc'
   project: services
   source:
-    path: instances/ace-infra
+    path: instances/ace
   syncPolicy:
     automated:
       prune: true
