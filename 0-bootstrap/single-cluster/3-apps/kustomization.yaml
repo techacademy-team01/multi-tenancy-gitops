@@ -30,9 +30,9 @@ resources:
 
 
 ## SKO sample apps
-#- argocd/sko-sample/eventstream
-#- argocd/sko-sample/mqmgr
-#- argocd/sko-sample/ace-001
+#- argocd/sko-sample/eventstream.yaml
+#- argocd/sko-sample/mqmgr.yaml
+#- argocd/sko-sample/ace-001.yaml
 
 
 patches:

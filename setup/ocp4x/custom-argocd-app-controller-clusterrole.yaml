@@ -87,6 +87,7 @@ rules:
       - platformnavigators
       - operationsdashboards
       - assetrepositories
+      - operationsdashboardservicebindings
   - verbs:
       - '*'
     apiGroups:
