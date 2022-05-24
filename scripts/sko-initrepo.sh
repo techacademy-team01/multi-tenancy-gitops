@@ -18,8 +18,6 @@ git fetch sko master
 git rebase sko/master 
 git rm -r 0-bootstrap/others
 
-echo "Type :wq to save git rebase"
-pause
 git rebase --continue
 git add 0-bootstrap/single-cluster/2-services/argocd/instances/
 sed -i*.bak '13,15d;17d' 0-bootstrap/bootstrap.yaml
@@ -30,8 +28,6 @@ git add 0-bootstrap/bootstrap.yaml
 git add 0-bootstrap/single-cluster/bootstrap.yaml
 git rm -r 0-bootstrap/others
 
-echo "Type :wq to save git rebase"
-pause
 git rebase --continue
 git push origin --force
 
