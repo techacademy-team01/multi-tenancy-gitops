@@ -134,11 +134,21 @@ All preparation work is done at this stage - the rest of the work is for the stu
 
 5. Activate ACE - MQ application
 
+    - Go to the folder `multi-tenancy-gitops-apps/sko-sample/ace-001` 
+    - Run the script to generate the YAML resources:
+
+        ``` bash
+        ./ace-config-barauth-github.sh
+        ./ace-config-policy-mq.sh
+        ```
+
+    - Verify that there are 2 YAML files generated in that path
+
     - Edit `multi-tenancy-gitops/0-bootstrap/single-cluster/3-apps/kustomization.yaml`. Uncomment the lines for:
 
-    ```
-    - argocd/sko-sample/ace-001.yaml
-    ```
+        ```
+        - argocd/sko-sample/ace-001.yaml
+        ```
 
     - Add, Commit and Push the changes to multi-tenancy-gitops; then refresh in argoCD console the `Application` application. **Make sure that all the status are Sync and Healthy before progressing.**
 
