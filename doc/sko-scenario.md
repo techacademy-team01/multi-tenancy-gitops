@@ -44,30 +44,6 @@ Prepare and activate the Techzone reservation with the appropriate GitHub token 
     git push origin --force
     ```
 
-3. Prepare the infra layer, edit `multi-tenancy-gitops/0-bootstrap/single-cluster/1-infra/kustomization.yaml`
-    Uncomment the lines for:
-
-    ```
-    - argocd/consolenotification.yaml
-    - argocd/namespace-tools.yaml
-    - argocd/namespace-ibm-common-services.yaml
-    - argocd/serviceaccount-ibm-common-services.yaml
-    ```
-
-4. Edit `multi-tenancy-gitops/0-bootstrap/single-cluster/1-infra/argocd/consolenotification.yaml` and change the clusterdescription to the GIT_ORG that is attached.
-
-5. Add, Commit and Push the changes to multi-tenancy-gitops; then refresh in argoCD console the `Infra` application.
-
-3. Prepare the services layer, edit `multi-tenancy-gitops/0-bootstrap/single-cluster/2-services/kustomization.yaml`
-    Uncomment the lines for:
-
-    ```
-    - argocd/operators/ibm-catalogs.yaml
-    - argocd/operators/ibm-automation-foundation-core-operator.yaml
-    ```
-
-5. Add, Commit and Push the changes to multi-tenancy-gitops; then refresh in argoCD console the `Services` application. This is to make sure Foundation 1.2.1 is applied first due to a problem with assetrepo operator.
-
 3. Prepare the services layer (2nd batch operators), edit `multi-tenancy-gitops/0-bootstrap/single-cluster/2-services/kustomization.yaml`
     Uncomment the lines for:
 
@@ -88,6 +64,7 @@ Prepare and activate the Techzone reservation with the appropriate GitHub token 
 
     ```
     - argocd/instances/cp4itracing.yaml
+    - argocd/instances/opsdashboard.yaml
     - argocd/instances/ibm-platform-navigator-instance.yaml
     - argocd/instances/apic-demo.yaml
     ```
@@ -137,7 +114,6 @@ All preparation work is done at this stage - the rest of the work is for the stu
     - argocd/instances/es-demo.yaml
     - argocd/instances/ace-infra.yaml
     - argocd/instances/assetrepo.yaml
-    - argocd/instances/opsdashboard.yaml
     ```
 
     - Add, Commit and Push the changes to multi-tenancy-gitops; then refresh in argoCD console the `Services` application. **Make sure that all the status are Sync and Healthy before progressing.**
