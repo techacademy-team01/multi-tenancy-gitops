@@ -17,25 +17,13 @@ git remote add sko https://github.com/sko-master/multi-tenancy-gitops
 git fetch sko master
 git rebase sko/master 
 git rm -r 0-bootstrap/others
-
-git rebase --continue
-git add 0-bootstrap/single-cluster/2-services/argocd/instances/
-git add 0-bootstrap/single-cluster/2-apps/argocd/instances/
 sed -i*.bak '13,15d;17d' 0-bootstrap/bootstrap.yaml
 sed -i*.bak '13,15d;17d' 0-bootstrap/single-cluster/bootstrap.yaml
 rm 0-bootstrap/single-cluster/*bak
 rm 0-bootstrap/*bak
 git add 0-bootstrap/bootstrap.yaml
 git add 0-bootstrap/single-cluster/bootstrap.yaml
-git rm -r 0-bootstrap/others
 
 git rebase --continue
-## make sure foundation core is on 1.2
-
-sed -i*.bak 's/1.3/1.2/g' 0-bootstrap/single-cluster/2-services/argocd/operators/ibm-automation-foundation-core-operator.yaml
-rm 0-bootstrap/single-cluster/2-services/argocd/operators/*bak
-git add 0-bootstrap/single-cluster/2-services/argocd/operators/
-git commit -m "foundation core v1.2"
-
 git push origin --force
 
