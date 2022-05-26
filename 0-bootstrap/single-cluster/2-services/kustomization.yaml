@@ -17,7 +17,7 @@ resources:
 #- argocd/operators/ibm-opsdashboard-operator.yaml
 - argocd/operators/ibm-platform-navigator.yaml
 - argocd/instances/ibm-platform-navigator-instance.yaml
-#- argocd/instances/cp4itracing.yaml
+- argocd/instances/cp4itracing.yaml
 
 ## CP4I for SKO
 #- argocd/instances/es-demo.yaml
