@@ -35,7 +35,7 @@ Prepare and activate the Techzone reservation with the appropriate GitHub token 
     git fetch sko master
     git rebase sko/master
     git push origin --force
-    cd multi-tenancy-gitops
+    cd ../multi-tenancy-gitops
     git remote add sko https://github.com/sko-master/multi-tenancy-gitops
     git fetch sko master
     git rebase sko/master 

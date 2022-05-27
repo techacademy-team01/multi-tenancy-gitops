@@ -23,6 +23,8 @@ rm 0-bootstrap/single-cluster/*bak
 rm 0-bootstrap/*bak
 git add 0-bootstrap/bootstrap.yaml
 git add 0-bootstrap/single-cluster/bootstrap.yaml
+git add 0-bootstrap/single-cluster/2-services/argocd/instances/
+git add 0-bootstrap/single-cluster/3-apps/argocd/sko-sample/
 
 git rebase --continue
 git push origin --force
