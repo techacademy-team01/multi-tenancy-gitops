@@ -21,6 +21,12 @@ Prepare and activate the Techzone reservation with the appropriate GitHub token 
     gh repo fork https://github.com/sko-master/multi-tenancy-gitops-apps --org ${GIT_ORG} --clone
     ```
 
+2. Login using CLI to the cluster and update argoCD privileges by running 
+
+    ```bash
+    curl https://raw.githubusercontent.com/sko-master/multi-tenancy-gitops/master/setup/ocp4x/custom-argocd-app-controller-clusterrole.yaml | oc apply -f - 
+    ```
+
 2. As the repo is based on `cloud-native-toolkit` not `sko-master` - you must rebase the main repo and the services repo
 
     ```
@@ -44,12 +50,6 @@ Prepare and activate the Techzone reservation with the appropriate GitHub token 
     git add 0-bootstrap/single-cluster/3-apps/argocd/sko-sample
     git rebase --continue
     git push origin --force
-    ```
-
-2. Login using CLI to the cluster and update argoCD privileges by running 
-
-    ```bash
-    oc apply -f multi-tenancy-gitops/setup/ocp4x
     ```
 
 5. Refresh in argoCD web ui the `Infra` and `Services` applications. The `apic-demo` and `ibm-platform-navigator-instance` may take up to 1 hour to complete. **Make sure that all the status are Sync and Healthy before progressing.**
