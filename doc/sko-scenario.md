@@ -4,9 +4,9 @@ This is based on getting a ROKS cluster with GitOps offering in [https://techzon
 
 ## Preparation
 
-- GitHub token
-- GIT_ORG
-- Techzone reservation
+- GitHub token (with `repo` and `admin:repo_hook` permissions)
+- Empty GIT_ORG organization (ie no GitOps related repos) 
+- Techzone reservation (ROKS cluster with GitOps 3 nodes 16x64)
 
 Prepare and activate the Techzone reservation with the appropriate GitHub token and GIT_ORG. Share the TechZone reservation and invite user to GIT_ORG.
 
@@ -52,7 +52,10 @@ Prepare and activate the Techzone reservation with the appropriate GitHub token 
     git push origin --force
     ```
 
-5. Add, Commit and Push the changes to multi-tenancy-gitops; then refresh in argoCD console the `Services` application. **Make sure that all the status are Sync and Healthy before progressing.**
+5. Refresh in argoCD web ui the `Infra` and `Services` applications. The `apic-demo` and `ibm-platform-navigator-instance` may take up to 1 hour to complete. **Make sure that all the status are Sync and Healthy before progressing.**
+
+    - Check that the opsdashboard application has healthy instances 
+    - Check that in apic-demo the OperationDashboardServiceBinding object does not have error messages
 
 ---
 
