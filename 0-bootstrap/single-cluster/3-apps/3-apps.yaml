@@ -44,7 +44,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: applications
+  name: 03-applications
   annotations:
     argocd.argoproj.io/sync-wave: "300"
   labels:

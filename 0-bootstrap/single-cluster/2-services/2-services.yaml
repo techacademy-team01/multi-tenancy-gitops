@@ -104,7 +104,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: services
+  name: 02-services
   annotations:
     argocd.argoproj.io/sync-wave: "200"
   labels:

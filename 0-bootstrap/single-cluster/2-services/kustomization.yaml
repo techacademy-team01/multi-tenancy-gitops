@@ -8,7 +8,7 @@ resources:
 #- argocd/instances/ibm-apic-management-portal-instance.yaml
 #- argocd/instances/ibm-apic-gateway-analytics-instance.yaml
 #- argocd/operators/ibm-aspera-operator.yaml
-#- argocd/operators/ibm-assetrepository-operator.yaml
+- argocd/operators/ibm-assetrepository-operator.yaml
 #- argocd/operators/ibm-cp4i-operators.yaml
 - argocd/operators/ibm-datapower-operator.yaml
 #- argocd/operators/ibm-eventstreams-operator.yaml
@@ -23,7 +23,7 @@ resources:
 #- argocd/instances/es-demo.yaml
 - argocd/instances/apic-demo.yaml
 #- argocd/instances/ace-infra.yaml
-#- argocd/instances/assetrepo.yaml
+- argocd/instances/assetrepo.yaml
 #- argocd/instances/license-reporter.yaml
 - argocd/instances/opsdashboard.yaml
 

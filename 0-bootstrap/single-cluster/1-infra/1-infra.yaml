@@ -95,7 +95,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: infra
+  name: 01-infra
   annotations:
     argocd.argoproj.io/sync-wave: "100"
   labels:
