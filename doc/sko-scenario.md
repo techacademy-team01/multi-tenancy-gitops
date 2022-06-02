@@ -192,6 +192,23 @@ All preparation work is done at this stage - the rest of the work is for the stu
     
     - Check the output of the job and fix any error that may appear.
 
-8. Use the Platform Navigator to verify the stuff you deployed.
+8. Use the Platform Navigator to verify the stuff you deployed. (Need to be explained better and more thoroughly)
 
-TBD
+    - Check the integration instances to be all `Ready`
+
+    - Go to the API (...) > **Run** > **API**
+
+    - Make sure the API is Online and go to the **Explore** tab
+
+    - select **Try It** tab 
+    
+    - Generate the input data
+
+    - Click **Send**
+
+    - Be sure to get the result 
+
+    - Go to the Tracing (...) > **Operate** > **Integration Trace**
+
+    - Go to **Traces** and select the entry that has all APIC ACE and MQ components
+
