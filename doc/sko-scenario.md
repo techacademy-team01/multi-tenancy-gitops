@@ -147,7 +147,7 @@ All preparation work is done at this stage - the rest of the work is for the stu
         - argocd/sko-sample/ace-001.yaml
         ```
 
-    - Add, Commit and Push the changes to multi-tenancy-gitops; then refresh in argoCD console the `Application` application. **Make sure that all the status are Sync and Healthy before progressing.**
+    - Add, Commit and Push the changes to multi-tenancy-gitops-apps and multi-tenancy-gitops; then refresh in argoCD console the `Application` application. **Make sure that all the status are Sync and Healthy before progressing.**
 
     - Check that those deployment are successful 
 
@@ -168,7 +168,7 @@ All preparation work is done at this stage - the rest of the work is for the stu
         - argocd/sko-sample/apic-cust.yaml
         ```
 
-    - Add, Commit and Push the changes to multi-tenancy-gitops; then refresh in argoCD console the `Application` application. **Make sure that all the status are Sync and Healthy before progressing.**
+    - Add, Commit and Push the changes to multi-tenancy-gitops-apps and multi-tenancy-gitops; then refresh in argoCD console the `Application` application. **Make sure that all the status are Sync and Healthy before progressing.**
 
     - Check that the apic-setup job is successful (look at the pod's logs)
 
@@ -176,7 +176,7 @@ All preparation work is done at this stage - the rest of the work is for the stu
 
     - In the Terminal session, run `./apic-publish-api.sh`; while running, open the URL provided in a different browser session and collect the API key to be pasted back to the terminal session.
 
-    - If there are no error - you API is published successfully
+    - If there are no error - your API is published successfully
 
 7. Deploy Event Stream customization:
 
