@@ -98,7 +98,6 @@ All preparation work is done at this stage - the rest of the work is for the stu
 
     ```
     - argocd/operators/ibm-ace-operator.yaml
-    - argocd/operators/ibm-assetrepository-operator.yaml
     - argocd/operators/ibm-eventstreams-operator.yaml
     - argocd/operators/ibm-mq-operator.yaml
     ```
@@ -112,7 +111,6 @@ All preparation work is done at this stage - the rest of the work is for the stu
     ```
     - argocd/instances/es-demo.yaml
     - argocd/instances/ace-infra.yaml
-    - argocd/instances/assetrepo.yaml
     ```
 
     - Add, Commit and Push the changes to multi-tenancy-gitops; then refresh in argoCD console the `Services` application. **Make sure that all the status are Sync and Healthy before progressing.**
@@ -152,5 +150,48 @@ All preparation work is done at this stage - the rest of the work is for the stu
     - Add, Commit and Push the changes to multi-tenancy-gitops; then refresh in argoCD console the `Application` application. **Make sure that all the status are Sync and Healthy before progressing.**
 
     - Check that those deployment are successful 
+
+6. Deploy APIC API definition:
+
+    - Go to the folder `multi-tenancy-gitops-apps/sko-sample/apic-cust` 
+    - Run the script to generate the APIC mail secret (from `https://mailtrap.io`):
+
+        ``` bash
+        MAILTRAP_USER=<user> MAILTRAP_PWD=<pwd> ./apic-user-mail-secret.sh
+        ```
+
+    - Verify that there are secret YAML files updated in that path
+
+    - Edit `multi-tenancy-gitops/0-bootstrap/single-cluster/3-apps/kustomization.yaml`. Uncomment the lines for:
+
+        ```
+        - argocd/sko-sample/apic-cust.yaml
+        ```
+
+    - Add, Commit and Push the changes to multi-tenancy-gitops; then refresh in argoCD console the `Application` application. **Make sure that all the status are Sync and Healthy before progressing.**
+
+    - Check that the apic-setup job is successful (look at the pod's logs)
+
+    - Publish the API connect API, in OpenShift console - go to the **Workloads** > **Pods** and filter by the work `publish`; select the pod and go to the **Terminal** tab.
+
+    - In the Terminal session, run `./apic-publish-api.sh`; while running, open the URL provided in a different browser session and collect the API key to be pasted back to the terminal session.
+
+    - If there are no error - you API is published successfully
+
+7. Deploy Event Stream customization:
+
+    - Go to the folder `multi-tenancy-gitops-apps/sko-sample/eventstream` 
+
+    - Edit `multi-tenancy-gitops/0-bootstrap/single-cluster/3-apps/kustomization.yaml`. Uncomment the lines for:
+
+        ```
+        - argocd/sko-sample/eventstream.yaml
+        ```
+
+    - Add, Commit and Push the changes to multi-tenancy-gitops; then refresh in argoCD console the `Application` application. 
+    
+    - Check the output of the job and fix any error that may appear.
+
+8. Use the Platform Navigator to verify the stuff you deployed.
 
 TBD
