@@ -31,10 +31,17 @@ resources:
 
 ## SKO sample apps
 #- argocd/sko-sample/mqmgr.yaml
-#- argocd/sko-sample/ace-001.yaml
 #- argocd/sko-sample/apic-cust.yaml
 #- argocd/sko-sample/eventstream.yaml
+#- argocd/sko-sample/ace-00-configs.yaml
+#- argocd/sko-sample/ace-backend.yaml
+#- argocd/sko-sample/ace-evnt2mail.yaml
+#- argocd/sko-sample/ace-fwdmqevnt.yaml
+#- argocd/sko-sample/ace-mqapidflt.yaml
+#- argocd/sko-sample/ace-mqapiprem.yaml
+#- argocd/sko-sample/ace-sflead.yaml
 
+#- argocd/sko-sample/ace-nnn.yaml
 
 patches:
 - target:
