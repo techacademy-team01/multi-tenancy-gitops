@@ -102,7 +102,7 @@ All preparation work is done at this stage - the rest of the work is for the stu
     - argocd/operators/ibm-mq-operator.yaml
     ```
 
-5. Add, Commit and Push the changes to multi-tenancy-gitops; then refresh in argoCD console the `Services` application. **Make sure that all the status are Sync and Healthy before progressing.**
+5. Add, Commit and Push the changes to multi-tenancy-gitops; then refresh in argoCD console the `02-Services` application. **Make sure that all the status are Sync and Healthy before progressing.**
 
 3. Deploy additional instances for App Connect add-ons, Operation Dashboard and Asset Repo:
 
@@ -113,7 +113,7 @@ All preparation work is done at this stage - the rest of the work is for the stu
     - argocd/instances/ace-infra.yaml
     ```
 
-    - Add, Commit and Push the changes to multi-tenancy-gitops; then refresh in argoCD console the `Services` application. **Make sure that all the status are Sync and Healthy before progressing.**
+    - Add, Commit and Push the changes to multi-tenancy-gitops; then refresh in argoCD console the `02-Services` application. **Make sure that all the status are Sync and Healthy before progressing.**
 
     - Check that those deployment are successful 
 
@@ -125,29 +125,61 @@ All preparation work is done at this stage - the rest of the work is for the stu
     - argocd/sko-sample/mqmgr.yaml
     ```
 
-    - Add, Commit and Push the changes to multi-tenancy-gitops; then refresh in argoCD console the `Application` application. **Make sure that all the status are Sync and Healthy before progressing.**
+    - Add, Commit and Push the changes to multi-tenancy-gitops; then refresh in argoCD console the `03-Application` application. **Make sure that all the status are Sync and Healthy before progressing.**
 
     - Check that those deployment are successful 
 
-5. Activate ACE - MQ application
+7. Deploy Event Stream customization:
 
-    - Go to the folder `multi-tenancy-gitops-apps/sko-sample/ace-001` 
-    - Run the script to generate the YAML resources:
-
-        ``` bash
-        ./ace-config-barauth-github.sh
-        ./ace-config-policy-mq.sh
-        ```
-
-    - Verify that there are 2 YAML files generated in that path
+    - Go to the folder `multi-tenancy-gitops-apps/sko-sample/eventstream` 
 
     - Edit `multi-tenancy-gitops/0-bootstrap/single-cluster/3-apps/kustomization.yaml`. Uncomment the lines for:
 
         ```
-        - argocd/sko-sample/ace-001.yaml
+        - argocd/sko-sample/eventstream.yaml
         ```
 
-    - Add, Commit and Push the changes to multi-tenancy-gitops-apps and multi-tenancy-gitops; then refresh in argoCD console the `Application` application. **Make sure that all the status are Sync and Healthy before progressing.**
+    - Add, Commit and Push the changes to multi-tenancy-gitops; then refresh in argoCD console the `03-Application` application. 
+    
+    - Check the output of the job and fix any error that may appear.
+
+9. Work with App Connect Enterprise integration servers:
+
+    - Go to the `multi-tenancy-gitops-apps/sko-sample/ace-00-config`
+
+    - Run the programs: 
+
+        ```bash
+        ./06-ace-config-barauth-github.sh
+        ./07-ace-config-policy-mq.sh
+        SF_USER=<my-sf-user> SF_PWD=<my-sf-pwd> SF_CLIENT_ID=<my-sf-client-id> SF_CLIENT_SECRET=<my-sf-client-secret> SF_LOGIN_URL="https://login.salesforce.com" ./08-ace-config-accounts-sf.sh
+        ./10-ace-config-policy-es-scram.sh
+        ./11-ace-config-setdbparms-es-scram.sh
+        ./12-ace-config-truststore-es.sh
+        ./13-ace-config-policy-udp.sh
+        ./14-ace-config-policy-email.sh
+        MAILTRAP_USER=<user> MAILTRAP_PWD=<pwd> ./15-ace-config-setdbparms-email.sh
+        ```
+
+    - Uncomment the content of `multi-tenancy-gitops-apps/sko-sample/ace-00-config/kustomization.yaml`
+
+    - Verify that there are 9 YAML files generated in that path
+
+    - Add, Commit and Push the changes to multi-tenancy-gitops-apps
+    
+    - Edit `multi-tenancy-gitops/0-bootstrap/single-cluster/3-apps/kustomization.yaml`. Uncomment the lines for:
+
+        ```
+        - argocd/sko-sample/ace-00-config.yaml
+        - argocd/sko-sample/ace-backend.yaml
+        - argocd/sko-sample/ace-evnt2mail.yaml
+        - argocd/sko-sample/ace-fwdmqevnt.yaml
+        - argocd/sko-sample/ace-mqapidflt.yaml
+        - argocd/sko-sample/ace-mqapiprem.yaml
+        - argocd/sko-sample/ace-sflead.yaml
+        ```
+
+    - Add, Commit and Push the changes to multi-tenancy-gitops; then refresh in argoCD console the `03-Application` application. **Make sure that all the status are Sync and Healthy before progressing.**
 
     - Check that those deployment are successful 
 
@@ -177,20 +209,6 @@ All preparation work is done at this stage - the rest of the work is for the stu
     - In the Terminal session, run `./apic-publish-api.sh`; while running, open the URL provided in a different browser session and collect the API key to be pasted back to the terminal session.
 
     - If there are no error - your API is published successfully
-
-7. Deploy Event Stream customization:
-
-    - Go to the folder `multi-tenancy-gitops-apps/sko-sample/eventstream` 
-
-    - Edit `multi-tenancy-gitops/0-bootstrap/single-cluster/3-apps/kustomization.yaml`. Uncomment the lines for:
-
-        ```
-        - argocd/sko-sample/eventstream.yaml
-        ```
-
-    - Add, Commit and Push the changes to multi-tenancy-gitops; then refresh in argoCD console the `Application` application. 
-    
-    - Check the output of the job and fix any error that may appear.
 
 8. Use the Platform Navigator to verify the stuff you deployed. (Need to be explained better and more thoroughly)
 
