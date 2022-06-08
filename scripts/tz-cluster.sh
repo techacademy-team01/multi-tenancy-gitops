@@ -67,6 +67,10 @@ ibmcloud oc cluster create classic \
         --public-service-endpoint \
         --entitlement cloud_pak || exit 1
 
+mkdir ${GIT_ORG}
+PWD=$(pwd)
+KUBECONFIG=${PWD}/${GIT_ORG}/kubeconfig
+
 ## loop to wait for cluster to be ready
 status=$(ibmcloud oc cluster get -c $CNAME | grep "^State:"  | awk '{print $2}')
 while [[ "$status" != "normal" ]]; do
@@ -258,7 +262,6 @@ oc annotate storageclass managed-nfs-storage storageclass.kubernetes.io/is-defau
 
 sleep 60
 
-mkdir ${GIT_ORG}
 cd ${GIT_ORG}
 echo ${GH_TOKEN} | gh auth login --with-token
 
