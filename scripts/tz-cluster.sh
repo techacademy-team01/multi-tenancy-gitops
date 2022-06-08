@@ -17,6 +17,10 @@ if [ -z "${GH_TOKEN}" ]; then
   echo "\$GH_TOKEN - GitHub token is required"
   err=$((err+1))
 fi
+if [ -z "${IBM_ENTITLEMENT_KEY}" ]; then 
+  echo "\$IBM_ENTITLEMENT_KEY - GitHub token is required"
+  err=$((err+1))
+fi
 
 if [[ "${err}" -ne "0" ]]; then 
   exit 99
@@ -24,7 +28,7 @@ fi
 
 # export USER_PWD=my-ibmcloud-pwd
 # This is TechZone account:
-ibmcloud login -a cloud.ibm.com -r us-south -g default -u passcode -p ${TOKEN} -c 39e2321422d14070954ed0b48a1db535 || exit 1
+ibmcloud login -a cloud.ibm.com -r us-south -g default -u passcode -p ${TOKEN} -g dteroks -c 39e2321422d14070954ed0b48a1db535 || exit 1
 # Enter the Zone where you want to create cluster.
 # You can check the zones available using the following command:
 # ibmcloud oc zone ls --provider classic
@@ -276,4 +280,7 @@ git add .
 git commit -m "set source"
 git push origin
 oc apply -f 0-bootstrap/single-cluster/bootstrap.yaml
-
+oc create ns tools
+oc create ns ibm-common-services
+oc create secret docker-registry ibm-entitlement-key --docker-server="cp.icr.io" --docker-username="cp" --docker-password="${IBM-ENTITLEMENT-KEY}" -n tools
+oc create secret docker-registry ibm-entitlement-key --docker-server="cp.icr.io" --docker-username="cp" --docker-password="${IBM-ENTITLEMENT-KEY}" -n ibm-common-services
