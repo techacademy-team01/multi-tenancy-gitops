@@ -273,7 +273,8 @@ cd ..
 oc apply -f $GIT_ORG/multi-tenancy-gitops/setup/ocp4x/
 
 ## wait for gitops
-    while ! oc wait crd applications.argoproj.io --timeout=-1s --for=condition=Established  2>/dev/null; do sleep 30; done
+while ! oc wait crd applications.argoproj.io --timeout=-1s --for=condition=Established  2>/dev/null; do sleep 30; done
+sleep 120
 
 oc project openshift-gitops
 oc apply -f $GIT_ORG/multi-tenancy-gitops/setup/ocp4x/argocd-instance
