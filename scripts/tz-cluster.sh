@@ -247,7 +247,7 @@ parameters:
   archiveOnDelete: "false"
 EOF
 
-sleep 60s
+sleep 60
 echo "Pod info"
 oc get pod -l app=dte-nfs-provisioner
 
@@ -256,7 +256,7 @@ echo "Set default storage"
 oc annotate storageclass ibmc-block-gold storageclass.kubernetes.io/is-default-class-
 oc annotate storageclass managed-nfs-storage storageclass.kubernetes.io/is-default-class="true"
 
-sleep 60s
+sleep 60
 
 mkdir ${GIT_ORG}
 cd ${GIT_ORG}
