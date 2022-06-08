@@ -287,5 +287,5 @@ cd ../..
 oc apply -f $GIT_ORG/multi-tenancy-gitops/0-bootstrap/single-cluster/bootstrap.yaml
 oc create ns tools
 oc create ns ibm-common-services
-oc create secret docker-registry ibm-entitlement-key --docker-server="cp.icr.io" --docker-username="cp" --docker-password="${IBM-ENTITLEMENT-KEY}" -n tools
-oc create secret docker-registry ibm-entitlement-key --docker-server="cp.icr.io" --docker-username="cp" --docker-password="${IBM-ENTITLEMENT-KEY}" -n ibm-common-services
+oc create secret docker-registry ibm-entitlement-key --docker-server="cp.icr.io" --docker-username="cp" --docker-password="${IBM_ENTITLEMENT_KEY}" -n tools
+oc create secret docker-registry ibm-entitlement-key --docker-server="cp.icr.io" --docker-username="cp" --docker-password="${IBM_ENTITLEMENT_KEY}" -n ibm-common-services
