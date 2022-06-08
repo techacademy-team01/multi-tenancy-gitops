@@ -18,7 +18,7 @@ if [ -z "${GH_TOKEN}" ]; then
   err=$((err+1))
 fi
 if [ -z "${IBM_ENTITLEMENT_KEY}" ]; then 
-  echo "\$IBM_ENTITLEMENT_KEY - GitHub token is required"
+  echo "\$IBM_ENTITLEMENT_KEY: - GitHub token is required"
   err=$((err+1))
 fi
 
@@ -68,14 +68,14 @@ ibmcloud oc cluster create classic \
         --entitlement cloud_pak || exit 1
 
 ## loop to wait for cluster to be ready
-status=$(ibmcloud oc cluster get -c $CNAME | grep "State:" | cut -d" " -f2)
+status=$(ibmcloud oc cluster get -c $CNAME | grep "^State:"  | awk '{print $2}')
 while [[ "$status" != "normal" ]]; do
   sleep 60
   echo -n "."
-  status=$(ibmcloud oc cluster get -c $CNAME | grep "State:" | cut -d" " -f2)
+  status=$(ibmcloud oc cluster get -c $CNAME | grep "^State:"  | awk '{print $2}')
 done
 
-ibmcloud ks cluster config --admin -c ${CLUSTERNAME} || exit 1
+ibmcloud ks cluster config --admin -c ${CNAME} || exit 1
 
 NFSNAMESPACE="dtenfs"
 PVCNAME="dte-nfs-storage"
@@ -108,7 +108,7 @@ while [ ${retry} -lt ${max_retry} ]; do
     pvcready=$(oc get pvc ${PVCNAME} -ojson | jq -r '.status.phase')
     if [[ "$pvcready" != "Bound" ]]; then
         (( retry = retry + 1 ))
-        sleep 60s
+        sleep 60
     else
         pvcsuccess="yes"
         break
@@ -258,7 +258,6 @@ oc annotate storageclass managed-nfs-storage storageclass.kubernetes.io/is-defau
 
 sleep 60s
 
-export GIT_ORG=org
 mkdir ${GIT_ORG}
 cd ${GIT_ORG}
 echo ${GH_TOKEN} | gh auth login --with-token
@@ -267,19 +266,21 @@ gh repo fork https://github.com/sko-master/multi-tenancy-gitops --org ${GIT_ORG}
 gh repo fork https://github.com/sko-master/multi-tenancy-gitops-infra --org ${GIT_ORG} --clone
 gh repo fork https://github.com/sko-master/multi-tenancy-gitops-services --org ${GIT_ORG} --clone
 gh repo fork https://github.com/sko-master/multi-tenancy-gitops-apps --org ${GIT_ORG} --clone
-oc apply -f multi-tenancy-gitops/setup/ocp4x/
+cd ..
+oc apply -f $GIT_ORG/multi-tenancy-gitops/setup/ocp4x/
 
 ## wait for gitops
     while ! oc wait crd applications.argoproj.io --timeout=-1s --for=condition=Established  2>/dev/null; do sleep 30; done
 
 oc project openshift-gitops
-oc apply -f multi-tenancy-gitops/setup/ocp4x/argocd-instance
-cd multi-tenancy-gitops
-GIT_ORG=org ./scripts/set-git-source.sh
+oc apply -f $GIT_ORG/multi-tenancy-gitops/setup/ocp4x/argocd-instance
+cd $GIT_ORG/multi-tenancy-gitops
+./scripts/set-git-source.sh
 git add .
 git commit -m "set source"
 git push origin
-oc apply -f 0-bootstrap/single-cluster/bootstrap.yaml
+cd ../..
+oc apply -f $GIT_ORG/multi-tenancy-gitops/0-bootstrap/single-cluster/bootstrap.yaml
 oc create ns tools
 oc create ns ibm-common-services
 oc create secret docker-registry ibm-entitlement-key --docker-server="cp.icr.io" --docker-username="cp" --docker-password="${IBM-ENTITLEMENT-KEY}" -n tools
