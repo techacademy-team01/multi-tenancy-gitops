@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     path: 0-bootstrap/single-cluster
-    repoURL: ${GIT_BASEURL}/${GIT_ORG}/${GIT_GITOPS}
+    repoURL: https://github.com/cp4i-techacademy-backup01/multi-tenancy-gitops.git
     targetRevision: master
   syncPolicy:
     automated:
