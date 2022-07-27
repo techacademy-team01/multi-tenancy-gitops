@@ -127,7 +127,7 @@ patches:
   patch: |-
     - op: add
       path: /spec/source/repoURL
-      value: ${GIT_BASEURL}/${GIT_ORG}/${GIT_GITOPS_SERVICES}
+      value: https://github.com/techacademy-team01/multi-tenancy-gitops-services.git
     - op: add
       path: /spec/source/targetRevision
       value: master
@@ -138,7 +138,7 @@ patches:
   patch: |-
     - op: add
       path: /spec/source/repoURL
-      value: ${GIT_BASEURL}/${GIT_ORG}/${GIT_GITOPS_APPLICATIONS}
+      value: https://github.com/techacademy-team01/multi-tenancy-gitops-apps.git
     - op: add
       path: /spec/source/targetRevision
       value: master
