@@ -20,9 +20,9 @@ resources:
 - argocd/instances/cp4itracing.yaml
 
 ## CP4I for SKO
-#- argocd/instances/es-demo.yaml
+- argocd/instances/es-demo.yaml
 - argocd/instances/apic-demo.yaml
-#- argocd/instances/ace-infra.yaml
+- argocd/instances/ace-infra.yaml
 - argocd/instances/assetrepo.yaml
 #- argocd/instances/license-reporter.yaml
 - argocd/instances/opsdashboard.yaml
