@@ -30,7 +30,7 @@ resources:
 
 
 ## SKO sample apps
-#- argocd/sko-sample/mqmgr.yaml
+- argocd/sko-sample/mqmgr.yaml
 #- argocd/sko-sample/apic-cust.yaml
 #- argocd/sko-sample/eventstream.yaml
 #- argocd/sko-sample/ace-00-configs.yaml
